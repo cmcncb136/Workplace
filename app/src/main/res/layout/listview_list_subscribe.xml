@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/button_frame_round"
+            android:backgroundTint="@color/background_black"
+            android:backgroundTintMode="add"
+            android:layout_marginVertical="3dp"
+            >
+        <ImageView
+                android:id="@+id/subscribeTv"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/netflix_icon"
+                android:layout_margin="10dp"
+                />
+
+        <LinearLayout
+                android:layout_margin="10dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/subscribe_nameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text = "Netflix"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+
+
+            <TextView
+                    android:id="@+id/subscribe_capacityTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text = "현재 인원 10/50"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"
+                    />
+
+
+            <TextView
+                    android:id="@+id/subscribe_next_paymentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text = "다음 결제일 : 2024.5.20"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"
+                    />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
+
+        bind.mainGoBtn.setOnClickListener {
+            Toast.makeText(this, "go Main page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SubscribeListActivity::class.java))
+        }
     }
 
 }
