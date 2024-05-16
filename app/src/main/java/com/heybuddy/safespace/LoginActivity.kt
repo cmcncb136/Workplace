@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         val joinBtn = bind.joinBtn
         val loinBtn = bind.loginBtn
         emailEt = bind.emailEt
-        pwEt = bind.passwordEt
+        pwEt = bind.pwEt
 
 
         googeSignClient = GoogleSignIn.getClient(

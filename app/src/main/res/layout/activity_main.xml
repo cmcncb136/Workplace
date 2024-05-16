@@ -16,4 +16,11 @@
             android:text="Login Page 이동"
             />
 
+    <Button
+            android:id="@+id/mainGoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home Page"
+            />
+
 </LinearLayout>
