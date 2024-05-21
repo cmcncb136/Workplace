@@ -76,8 +76,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        >
+                android:layout_height="wrap_content">
 
             <TextView
                     android:id = "@+id/productstype_move"
@@ -98,6 +97,18 @@
                     android:layout_width="30dp"
                     android:layout_height="40dp"/>
 
+            <ListView
+                    app:layout_constraintTop_toBottomOf="@id/productstype_move"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:transcriptMode="disabled"
+                    android:id="@+id/products_movie"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -115,32 +126,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp">
 
-                <ImageView
-                        android:id="@+id/product_company_icon"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/netflix_icon"
 
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:layout_margin="10dp"/>
-
-                <TextView
-                        android:id="@+id/product_content_company"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        app:layout_constraintHorizontal_bias="0.35"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/product_company_icon"
-                        app:layout_constraintRight_toRightOf="parent"
-
-
-                        android:text = "Netflix"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:textSize="30dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,8 +153,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        >
+                android:layout_height="wrap_content">
 
             <TextView
                     android:id = "@+id/productstype_book"
