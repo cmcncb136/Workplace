@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import com.heybuddy.safespace.databinding.ProductBuyBinding
+import com.heybuddy.safespace.databinding.ActivityProductsBinding
 import com.heybuddy.safespace.product.ProductInfo
 
 class ProductListActivity: AppCompatActivity() {
 
-    private lateinit var bind: ProductBuyBinding
+    private lateinit var bind: ActivityProductsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = ProductBuyBinding.inflate(layoutInflater)
+        bind = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
         val adapter = ProductsListAdapter()
