@@ -27,10 +27,14 @@
         </activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SubscribeListActivity"></activity>
+
         <activity android:name=".JoinActivity"></activity>
         <activity android:name=".JoinInfoActivity"></activity>
 
         <activity android:name=".ProductListActivity"></activity>
+        <activity android:name=".ProductDetailActivity"></activity>
+        <activity android:name=".ProductBuyActivity"></activity>
+        <activity android:name=".SubscribeBuyCompleteActivity"></activity>
     </application>
 
 </manifest>

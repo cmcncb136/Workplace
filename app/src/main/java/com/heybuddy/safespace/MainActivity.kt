@@ -36,6 +36,26 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, JoinActivity::class.java))
         }
 
+        bind.productsBtn.setOnClickListener {
+            Toast.makeText(this, "go products Page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ProductListActivity::class.java))
+        }
+
+        bind.ProductDetailBtn.setOnClickListener {
+            Toast.makeText(this, "go Product Detail Page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ProductDetailActivity::class.java))
+        }
+
+        bind.ProductBuyBtn.setOnClickListener {
+            Toast.makeText(this, "go .Product Buy Page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ProductBuyActivity::class.java))
+        }
+
+        bind.BuyCompleteBtn.setOnClickListener {
+            Toast.makeText(this, "go Buy Complete Page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SubscribeBuyCompleteActivity::class.java))
+        }
+
 
 
     }

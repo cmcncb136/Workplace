@@ -1,7 +1,6 @@
 package com.heybuddy.safespace
 
 import android.content.Intent
-import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,7 +8,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.heybuddy.safespace.databinding.ActivityJoinBinding
-import org.w3c.dom.Text
 
 class JoinActivity: AppCompatActivity() {
 

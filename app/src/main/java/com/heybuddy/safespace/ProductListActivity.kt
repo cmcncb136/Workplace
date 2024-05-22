@@ -19,18 +19,35 @@ class ProductListActivity: AppCompatActivity() {
         bind = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
-        val adapter = ProductsListAdapter()
 
-        adapter.addItem(ProductInfo("Hello"))
-        adapter.addItem(ProductInfo("Hello"))
-        adapter.addItem(ProductInfo("Hello"))
-        adapter.addItem(ProductInfo("Hello"))
+        val moveAdapter = ProductsListAdapter()
+        val bookAdapter = ProductsListAdapter()
+        val musicAdapter = ProductsListAdapter()
 
-        bind.productsBook.adapter = adapter
+        //Movie에 추가
+        moveAdapter.addItem(ProductInfo("Hello"))
+        moveAdapter.addItem(ProductInfo("Hello"))
+
+        //book에 추가
+        bookAdapter.addItem(ProductInfo("Hello"))
+        bookAdapter.addItem(ProductInfo("Hello"))
+        bookAdapter.addItem(ProductInfo("Hello"))
+        bookAdapter.addItem(ProductInfo("Hello"))
+
+        //music에 추가
+        musicAdapter.addItem(ProductInfo("Hello"))
+        musicAdapter.addItem(ProductInfo("Hello"))
+        musicAdapter.addItem(ProductInfo("Hello"))
+
+
+        bind.productsMovie.adapter = bookAdapter
         setListViewHeightBaseOnChildren(bind.productsBook)
 
-        bind.productsBook.adapter = adapter
+        bind.productsBook.adapter = moveAdapter
         setListViewHeightBaseOnChildren(bind.productsMovie)
+
+        bind.productsMusic.adapter = musicAdapter
+        setListViewHeightBaseOnChildren(bind.productsMusic)
     }
 
     fun setListViewHeightBaseOnChildren(list: ListView){

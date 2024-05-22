@@ -14,18 +14,20 @@
             app:layout_constraintGuide_percent="0.15" />
 
 
-    <ImageView
+    <ImageButton
+            android:id="@+id/productPayment_backIcon"
             android:src="@drawable/back_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toTopOf="@id/top_guide" />
 
-
     <TextView
             android:layout_margin="5dp"
-            android:id = "@+id/companyname"
+            android:id = "@+id/chooseCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -69,7 +71,7 @@
         />
 
         <TextView
-                android:id="@+id/product"
+                android:id="@+id/subscribeProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/first"
@@ -82,11 +84,11 @@
 
 
         <TextView
-                android:id="@+id/payment_product"
+                android:id="@+id/paymentProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/second"
-                app:layout_constraintTop_toBottomOf="@+id/product"
+                app:layout_constraintTop_toBottomOf="@+id/subscribeProduct"
 
                 android:text = "Netflix"
                 android:textColor="@color/white"
@@ -126,7 +128,7 @@
 
 
         <TextView
-                android:id="@+id/product_cap"
+                android:id="@+id/productCap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/f"
@@ -143,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/s"
-                app:layout_constraintTop_toBottomOf="@+id/product_cap"
+                app:layout_constraintTop_toBottomOf="@+id/productCap"
 
                 android:text = "20명"
                 android:textColor="@color/white"
@@ -183,7 +185,7 @@
 
 
         <TextView
-                android:id="@+id/product_moth"
+                android:id="@+id/productMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/fi"
@@ -194,13 +196,12 @@
                 android:textSize="25dp"
         />
 
-
         <TextView
-                android:id="@+id/payment_moth"
+                android:id="@+id/paymentMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/se"
-                app:layout_constraintTop_toBottomOf="@+id/product_moth"
+                app:layout_constraintTop_toBottomOf="@+id/productMonth"
 
                 android:text = "3개월"
                 android:textColor="@color/white"
@@ -240,7 +241,7 @@
 
 
         <TextView
-                android:id="@+id/product_price"
+                android:id="@+id/productPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/fir"
@@ -253,11 +254,11 @@
 
 
         <TextView
-                android:id="@+id/payment_price"
+                android:id="@+id/paymentPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@id/sec"
-                app:layout_constraintTop_toBottomOf="@+id/product_price"
+                app:layout_constraintTop_toBottomOf="@+id/productPrice"
 
                 android:text = "1,800,000 원"
                 android:textColor="@color/white"
@@ -267,7 +268,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/gotoMainBtn"
+            android:id="@+id/gotoPayment"
             android:layout_width="match_parent"
             android:layout_height="70dp"
 

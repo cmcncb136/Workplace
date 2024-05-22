@@ -40,6 +40,7 @@
         />
 
         <ImageView
+                android:id="@+id/paymentCompleteImg"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -49,6 +50,7 @@
                 android:src="@drawable/payfinish" />
 
         <TextView
+                android:id="@+id/nextPaymentdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/top_guide"
@@ -62,6 +64,7 @@
                 android:textSize="20dp" />
 
         <TextView
+                android:id="@+id/nextPaymentdateDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/top_guide"
