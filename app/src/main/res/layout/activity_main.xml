@@ -23,4 +23,18 @@
             android:text="Home Page"
             />
 
+    <Button
+            android:id="@+id/loadingGoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading Page" />
+
+
+    <Button
+            android:id="@+id/subscribeInfoGoBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subscribe Info Page" />
+
+
 </LinearLayout>

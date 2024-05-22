@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ListAdapter
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
 import com.heybuddy.safespace.subscribe.SubscribeInfo
@@ -23,9 +25,9 @@ class SubscribeListActivity: AppCompatActivity() {
         val adapter = SubscribesListAdapter()
 
 
-        adapter.addItem(SubscribeInfo("Hello"))
-        adapter.addItem(SubscribeInfo("Hello"))
-        adapter.addItem(SubscribeInfo("Hello"))
+        adapter.addItem(SubscribeInfo("Tving"))
+        adapter.addItem(SubscribeInfo("밀리"))
+        adapter.addItem(SubscribeInfo("지니"))
         adapter.addItem(SubscribeInfo("Hello"))
         adapter.addItem(SubscribeInfo("Hello"))
         adapter.addItem(SubscribeInfo("Hello"))
@@ -81,7 +83,7 @@ class SubscribesListAdapter: BaseAdapter(){
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_subscribe, parent, false)
-
+        view.findViewById<TextView>(R.id.subscribe_nameTv).text = s.productName
 
         return view
     }

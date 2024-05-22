@@ -27,6 +27,14 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "go Main page", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, SubscribeListActivity::class.java))
         }
+
+        bind.loadingGoBtn.setOnClickListener{
+            startActivity(Intent(this, LoadingActivity::class.java))
+        }
+
+        bind.subscribeInfoGoBtn.setOnClickListener{
+            startActivity(Intent(this, SubscribeInformationDetailActivity::class.java))
+        }
     }
 
 }
