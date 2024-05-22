@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_black"
+
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+>
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id = "@+id/top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+    <TextView
+            android:id = "@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:text="회원가입"
+            android:textColor="@color/white"
+            android:textSize="50dp"
+
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/top_guide"
+            app:layout_constraintTop_toTopOf="@+id/top_guide"
+    />
+
+    <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="40dp"
+            app:layout_constraintTop_toTopOf="@+id/top_guide"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+    >
+
+    </TableLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+            android:id = "@+id/middle_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+
+    <TextView
+            android:id="@+id/idTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:text="아이디"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/middle_guide"
+    />
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/idEt"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+
+            android:textColor="@color/white"
+            android:textColorHint="@color/box_frame_grey"
+
+
+            android:backgroundTint="@color/box_black"
+            android:background="@drawable/button_frame_round"
+            android:backgroundTintMode="add"
+
+            app:layout_constraintTop_toBottomOf="@id/idTv"
+            app:layout_constraintLeft_toLeftOf="parent"  />
+
+    <TextView
+            android:id="@+id/idCheck"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:paddingStart="16dp"
+            android:paddingTop="7dp"
+            android:text="중복 확인"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/box_frame_grey"
+
+            android:backgroundTint="@color/green"
+            android:background="@drawable/button_frame_round"
+            android:backgroundTintMode="add"
+
+            app:layout_constraintTop_toBottomOf="@id/idTv"
+            app:layout_constraintRight_toRightOf="parent"  />
+
+
+    <TextView
+            android:id="@+id/passwdTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:text="비밀번호"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idEt"
+    />
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/passwdEv"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+
+            android:textColor="@color/white"
+            android:textColorHint="@color/box_frame_grey"
+
+
+            android:backgroundTint="@color/box_black"
+            android:background="@drawable/button_frame_round"
+
+            android:backgroundTintMode="add"
+
+            app:layout_constraintTop_toBottomOf="@id/passwdTv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+
+            android:text="다음"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+
+            android:background="@drawable/button_frame_round"
+            android:backgroundTint="@color/box_black"
+            android:backgroundTintMode="add"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
