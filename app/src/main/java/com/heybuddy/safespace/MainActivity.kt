@@ -27,6 +27,17 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "go Main page", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, SubscribeListActivity::class.java))
         }
+
+
+        //이동 처리 (6개)
+        //JOIN -> JOIN INFO -> MAIN으로 임시 구현
+        bind.joinBtn.setOnClickListener {
+            Toast.makeText(this, "go Join Page", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, JoinActivity::class.java))
+        }
+
+
+
     }
 
 }

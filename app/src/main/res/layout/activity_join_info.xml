@@ -18,7 +18,7 @@
             app:layout_constraintGuide_percent="0.1" />
 
     <TextView
-            android:id = "@+id/titleTv"
+            android:id = "@+id/workplaceInfoTitleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -88,7 +88,7 @@
 
 
     <TextView
-            android:id="@+id/WorkplaceNameTv"
+            android:id="@+id/workplaceNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/workplaceNumEt"
     />
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/WorkplaceNameEt"
+            android:id="@+id/workplaceNameEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
 
@@ -114,13 +114,12 @@
 
             android:backgroundTintMode="add"
 
-            app:layout_constraintTop_toBottomOf="@id/WorkplaceNameTv"
+            app:layout_constraintTop_toBottomOf="@id/workplaceNameTv"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-            android:id="@+id/WorkplaceOwnerNameTv"
+            android:id="@+id/workplaceOwnerNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -130,10 +129,10 @@
             android:textSize="20sp"
 
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/WorkplaceNameEt"
+            app:layout_constraintTop_toBottomOf="@+id/workplaceNameEt"
     />
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/WorkplaceOwnerNameEt"
+            android:id="@+id/workplaceOwnerNameEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
 
@@ -146,14 +145,14 @@
 
             android:backgroundTintMode="add"
 
-            app:layout_constraintTop_toBottomOf="@id/WorkplaceOwnerNameTv"
+            app:layout_constraintTop_toBottomOf="@id/workplaceOwnerNameTv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <TextView
-            android:id="@+id/WorkplaceAddressTv"
+            android:id="@+id/workplaceAddressTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -163,10 +162,10 @@
             android:textSize="20sp"
 
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/WorkplaceOwnerNameEt"
+            app:layout_constraintTop_toBottomOf="@+id/workplaceOwnerNameEt"
     />
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/WorkplaceAddressTvEt"
+            android:id="@+id/workplaceAddressEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
 
@@ -179,14 +178,14 @@
 
             android:backgroundTintMode="add"
 
-            app:layout_constraintTop_toBottomOf="@id/WorkplaceAddressTv"
+            app:layout_constraintTop_toBottomOf="@id/workplaceAddressTv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginBtn"
+            android:id="@+id/joinFinishBtn"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginBottom="7dp"

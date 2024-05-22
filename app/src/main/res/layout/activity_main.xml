@@ -23,4 +23,42 @@
             android:text="Home Page"
             />
 
+    <Button
+            android:id="@+id/joinBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JOIN Page"
+    />
+
+    <Button
+            android:id="@+id/productsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Products Page"
+    />
+
+    <Button
+            android:id="@+id/ProductDetailBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Products detail Page"
+    />
+
+    <Button
+            android:id="@+id/ProductBuyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Products Buy Page"
+    />
+
+    <Button
+            android:id="@+id/BuyCompleteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buy complete Page"
+    />
+
+
+
+
 </LinearLayout>
