@@ -2,39 +2,35 @@ package com.heybuddy.safespace
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ListAdapter
 import android.widget.ListView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
-import com.heybuddy.safespace.subscribe.SubscribeInfo
+import com.heybuddy.safespace.databinding.ActivityProductsBinding
+import com.heybuddy.safespace.product.ProductInfo
 
-class SubscribeListActivity: AppCompatActivity() {
-    private lateinit var bind: ActivitySubscribeListBinding
+class ProductListActivity: AppCompatActivity() {
+
+    private lateinit var bind: ActivityProductsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = ActivitySubscribeListBinding.inflate(layoutInflater)
+        bind = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
-        val adapter = SubscribesListAdapter()
+        val adapter = ProductsListAdapter()
 
+        adapter.addItem(ProductInfo("Hello"))
+        adapter.addItem(ProductInfo("Hello"))
+        adapter.addItem(ProductInfo("Hello"))
+        adapter.addItem(ProductInfo("Hello"))
 
-        adapter.addItem(SubscribeInfo("Tving"))
-        adapter.addItem(SubscribeInfo("밀리"))
-        adapter.addItem(SubscribeInfo("지니"))
-        adapter.addItem(SubscribeInfo("Hello"))
-        adapter.addItem(SubscribeInfo("Hello"))
-        adapter.addItem(SubscribeInfo("Hello"))
-        adapter.addItem(SubscribeInfo("Hello"))
+        bind.productsBook.adapter = adapter
+        setListViewHeightBaseOnChildren(bind.productsBook)
 
-        bind.subscribeListView.adapter = adapter
-        setListViewHeightBaseOnChildren(bind.subscribeListView)
+        bind.productsBook.adapter = adapter
+        setListViewHeightBaseOnChildren(bind.productsMovie)
     }
 
     fun setListViewHeightBaseOnChildren(list: ListView){
@@ -51,36 +47,36 @@ class SubscribeListActivity: AppCompatActivity() {
         list.layoutParams = params
         list.requestLayout()
     }
+
 }
 
-class SubscribesListAdapter: BaseAdapter(){
-    val subscribes: ArrayList<SubscribeInfo> = ArrayList()
+
+class ProductsListAdapter: BaseAdapter(){
+    val products: ArrayList<ProductInfo> = ArrayList()
+
     override fun getCount(): Int {
-        return subscribes.size
+        return  products.size
     }
 
     override fun getItem(position: Int): Any {
-        return subscribes[position]
+        return  products[position]
     }
 
     override fun getItemId(position: Int): Long {
         return position as Long;
     }
 
-    fun addItem(s: SubscribeInfo){
-        subscribes.add(s)
+    fun addItem(s: ProductInfo){
+        products.add(s)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val context = parent!!.context
-        val s = subscribes[position]
-
+        val s = products[position]
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.listview_list_subscribe, parent, false)
-        view.findViewById<TextView>(R.id.subscribe_nameTv).text = s.productName
+        val view = inflater.inflate(R.layout.listview_list_products, parent, false)
 
         return view
     }
-
 }

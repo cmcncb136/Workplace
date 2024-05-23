@@ -13,7 +13,7 @@
             android:id="@+id/loginGoBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login Page"
+            android:text="Login Page 이동"
             />
 
     <Button
