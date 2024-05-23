@@ -31,11 +31,6 @@ class SubscribeListActivity: AppCompatActivity() {
         adapter.addItem(SubscribeInfo("Hello"))
         adapter.addItem(SubscribeInfo("Hello"))
 
-
-
-
-
-
         bind.subscribeListView.adapter = adapter
         setListViewHeightBaseOnChildren(bind.subscribeListView)
     }
