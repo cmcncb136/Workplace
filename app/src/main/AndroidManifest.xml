@@ -35,6 +35,8 @@
         <activity android:name=".ProductDetailActivity"></activity>
         <activity android:name=".ProductBuyActivity"></activity>
         <activity android:name=".SubscribeBuyCompleteActivity"></activity>
+        <activity android:name=".SubscribeInformationDetailActivity"></activity>
+        <activity android:name=".LoadingActivity"/>
     </application>
 
 </manifest>
