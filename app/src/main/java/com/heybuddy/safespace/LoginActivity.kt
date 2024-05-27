@@ -59,7 +59,12 @@ class LoginActivity : AppCompatActivity() {
             val email = emailEt.text.toString();
             val pw = pwEt.text.toString();
 
-            val emailPatern = android.util.Patterns.EMAIL_ADDRESS;
+            val emailPattern = android.util.Patterns.EMAIL_ADDRESS;
+            if(!emailPattern.matcher(email).matches()) {
+                Toast.makeText(this, "Email 양식이 맞지 않습니다!", Toast.LENGTH_SHORT)
+            }else{
+                singIn(email, pw);
+            }
         }
     }
 
@@ -81,9 +86,8 @@ class LoginActivity : AppCompatActivity() {
                 //우리의 Firebase 서버에 사용자 이메일정보보내기
                 val account = result.signInAccount
                 login.firebaseAuthWithGoogle(account, Intent(this, SubscribeListActivity::class.java))
-            }else{
+            }else
                 Toast.makeText(this, "Login fail!", Toast.LENGTH_SHORT).show()
-            }
 
         }
     }
@@ -93,14 +97,10 @@ class LoginActivity : AppCompatActivity() {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("Login", "signInWithEmail:success")
-                    val user = auth.currentUser
+                    startActivity(Intent(this, SubscribeListActivity::class.java))
                 } else {
                     Log.w("Login", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        this,
-                        "이메일 또는 비밀번호가 틀렸습니다.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    Toast.makeText(this, "이메일 또는 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT,).show()
                 }
             }
     }
@@ -110,34 +110,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 /*
-private fun join(){
-        //email과 password를 준다.
-        auth?.createUserWithEmailAndPassword(emailEt.text.toString(),passwordEt.text.toString())
-            ?.addOnCompleteListener {  //통신 완료가 된 후 무슨일을 할지
-                    task ->
-                if(task.isSuccessful){  //회원이 아닌 경우
-                    //정상적으로 이메일과 비번이 전달되어
-                    //새 유저 계정을 생성과 서버db 저장 완료 및 로그인
-                    //즉, 기존에 있는 계정이 아니다!
 
-
-                    val user = task.result.user
-                    //goMainActivity(task.result?.user)
-                    db.getReference("user").child(user?.uid.toString()).setValue(user?.email)
-                    Toast.makeText(this,"Join Succuess!",Toast.LENGTH_LONG).show()
-                }
-                else if (task.exception?.message.isNullOrEmpty()==false){
-                    //예외메세지가 있다면 출력
-                    //에러가 났다거나 서버가 연결이 실패했다거나
-                    Toast.makeText(this,task.exception?.message,Toast.LENGTH_LONG).show()
-                }
-                else{ //회원인 경우
-                    //여기가 실행되는 경우는 이미 db에 해당 이메일과 패스워드가 있는 경우
-                    //그래서 계정 생성이 아닌 로그인 함수로 이동
-                    //signIn()
-                }
-            }
-    }
 
 
  */

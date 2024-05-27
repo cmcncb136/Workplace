@@ -8,7 +8,13 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityJoinInfoBinding
+import com.heybuddy.safespace.databinding.ActivityLoginBinding
+import com.heybuddy.safespace.dto.WorkplaceInformationDto
+import com.heybuddy.safespace.service.WorkplaceInformationService
+import retrofit2.*
 
 class JoinInfoActivity: AppCompatActivity() {
 
