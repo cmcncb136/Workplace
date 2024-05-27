@@ -1,6 +1,7 @@
 package com.heybuddy.safespace
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductsBinding
 import com.heybuddy.safespace.dto.ProviderCategoryDto
 import com.heybuddy.safespace.dto.ProviderDto
+import com.heybuddy.safespace.product.ProductDetail
 import com.heybuddy.safespace.product.ProductInfo
 import com.heybuddy.safespace.service.ProviderCategoryService
 import org.w3c.dom.Text
@@ -114,14 +116,14 @@ class ProductListActivity: AppCompatActivity() {
 
 
 class ProductsListAdapter: BaseAdapter(){
-    val products: ArrayList<ProviderDto> = ArrayList()
+    val providers: ArrayList<ProviderDto> = ArrayList()
 
     override fun getCount(): Int {
-        return  products.size
+        return  providers.size
     }
 
     override fun getItem(position: Int): Any {
-        return  products[position]
+        return  providers[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -129,21 +131,27 @@ class ProductsListAdapter: BaseAdapter(){
     }
 
     fun addItem(s: ProviderDto){
-        products.add(s)
+        providers.add(s)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val context = parent!!.context
-        val s = products[position]
+        val p = providers[position]
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_products, parent, false)
-        view.findViewById<TextView>(R.id.providerTv).text = s.name
+        view.findViewById<TextView>(R.id.providerTv).text = p.name
 
-        Glide.with(view)
-            .load(RetrofitSetting.URL + s.imgPath)
+        Glide.with(view) //이미지 서버로부터 가져오기
+            .load(RetrofitSetting.URL +p.imgPath)
             .into(view.findViewById(R.id.providerIv))
 
+        view.setOnClickListener {
+            val intent = Intent(context, ProductDetail::class.java)
+            intent.putExtra("providerId", p.providerId);
+
+            context.startActivity(intent)
+        }
         return view
     }
 }

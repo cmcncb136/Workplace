@@ -32,14 +32,25 @@ class JoinInfoActivity: AppCompatActivity() {
     private lateinit var workplaceAddressTv:TextView
     private lateinit var workplaceAddressEt:EditText
 
+    private lateinit var workplacePhoneEt:EditText
+
+    private lateinit var workplaceCategoryEt:EditText
+
     private lateinit var joinFinishBtn:Button
+
+    private lateinit var auth:FirebaseAuth
+    private lateinit var retrofit: Retrofit
+    private lateinit var workplaceInformationService: WorkplaceInformationService
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val bind = ActivityJoinInfoBinding.inflate(layoutInflater)
         setContentView(bind.root);
+
+        auth = FirebaseAuth.getInstance()
+        retrofit = RetrofitSetting.getRetrofit()
+        workplaceInformationService = retrofit.create(WorkplaceInformationService::class.java)
 
         workplaceInfoTitle = bind.workplaceInfoTitleTv
 
@@ -55,12 +66,54 @@ class JoinInfoActivity: AppCompatActivity() {
         workplaceAddressTv = bind.workplaceAddressTv
         workplaceAddressEt = bind.workplaceAddressEt
 
+        workplacePhoneEt = bind.workplacePhoneEt
+        workplaceCategoryEt = bind.workplaceCategoryEt
+
         joinFinishBtn = bind.joinFinishBtn
 
 
         bind.joinFinishBtn.setOnClickListener {
-            Toast.makeText(this, "go Main Page", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
+            val num = workplaceNumEt.text.toString()
+            val name = workplaceNameEt.text.toString()
+            val owner = workplaceOwnerNameEt.text.toString()
+            val address = workplaceAddressEt.text.toString()
+            val phone = workplacePhoneEt.text.toString()
+            val category = workplaceCategoryEt.text.toString()
+            val uid: String = auth.uid!!;
+
+            if(num.isEmpty() || name.isEmpty() || owner.isEmpty() || address.isEmpty()
+                || phone.isEmpty() || category.isEmpty()){
+                Toast.makeText(this, "모든 항목 데이터가 있어야 합니다", Toast.LENGTH_SHORT).show()
+            }
+
+            val workplace = WorkplaceInformationDto(
+                businessType = category,
+                address = address,
+                workspacePhone = phone,
+                ownerName = owner,
+                dancPin = num,
+                workspaceName = name,
+                uid = uid,
+                joinDate = null,
+                workspaceIp = null
+            )
+
+            val call = workplaceInformationService.joinWorkplace(workplace)
+
+            call.enqueue(object: Callback<Boolean>{
+                override fun onResponse(p0: Call<Boolean>, p1: Response<Boolean>) {
+                    if(p1.body()?: false){
+                        Toast.makeText(this@JoinInfoActivity, "Join Success", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@JoinInfoActivity, SubscribeListActivity::class.java))
+                    }else{
+                        Toast.makeText(this@JoinInfoActivity, "Join Fail : " + p1.body(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(p0: Call<Boolean>, p1: Throwable) {
+                    Toast.makeText(this@JoinInfoActivity, "Communication Fail", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
 
     }

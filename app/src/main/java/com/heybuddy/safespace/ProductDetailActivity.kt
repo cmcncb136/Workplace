@@ -1,40 +1,78 @@
 package com.heybuddy.safespace
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductDetailBinding
 import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
+import com.heybuddy.safespace.dto.ProductDto
 import com.heybuddy.safespace.product.ProductDetail
+import com.heybuddy.safespace.service.ProductService
 import com.heybuddy.safespace.subscribe.SubscribeInfo
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class ProductDetailActivity: AppCompatActivity() {
 
     private lateinit var bind: ActivityProductDetailBinding
+    private lateinit var retrofit: Retrofit
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
+        retrofit = RetrofitSetting.getRetrofit()
+        val productService: ProductService = retrofit.create(ProductService::class.java)
+
+        val providerId = this.intent.getStringExtra("providerId")?:"a";
+
         val adapter = ProductDetailListAdapter()
 
-
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
-        adapter.addItem(ProductDetail("Hello"))
 
         //리스트 뷰 받아와서 넣기
         bind.ProductDetailListView.adapter = adapter
         setListViewHeightBaseOnChildren(bind.ProductDetailListView)
+
+
+        //val call = productService.findByProviderIdProduct(providerId)
+        val call = productService.findAllProduct()
+
+        call.enqueue(object: Callback<List<ProductDto>>{
+            override fun onResponse(p0: Call<List<ProductDto>>, body : Response<List<ProductDto>>) {
+                if(body.body() == null) {
+                    Toast.makeText(this@ProductDetailActivity, "그런 제공자는 없습니다.", Toast.LENGTH_SHORT).show();
+                    startActivity(Intent(this@ProductDetailActivity, ProductListActivity::class.java))
+                    finish()
+                    return
+                }
+
+                val products = body.body()!!
+
+                for(p in products){
+                    adapter.addItem(p)
+                }
+
+               adapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(p0: Call<List<ProductDto>>, p1: Throwable) {
+                Toast.makeText(this@ProductDetailActivity, p1.message, Toast.LENGTH_LONG).show();
+            }
+
+        })
+
 
     }
 
@@ -55,30 +93,31 @@ class ProductDetailActivity: AppCompatActivity() {
 }
 
 class ProductDetailListAdapter: BaseAdapter(){
-    val productDetail_: ArrayList<ProductDetail> = ArrayList()
+    val products: ArrayList<ProductDto> = ArrayList()
     override fun getCount(): Int {
-        return productDetail_.size
+        return products.size
     }
 
     override fun getItem(position: Int): Any {
-        return productDetail_[position]
+        return products[position]
     }
 
     override fun getItemId(position: Int): Long {
         return position as Long;
     }
 
-    fun addItem(s: ProductDetail){
-        productDetail_.add(s)
+    fun addItem(p: ProductDto){
+        products.add(p)
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val context = parent!!.context
-        val s = productDetail_[position]
+        val p = products[position]
 
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_prodct_detail, parent, false)
+        view.findViewById<TextView>(R.id.product_price).text = p.price.toString()
 
 
         return view
