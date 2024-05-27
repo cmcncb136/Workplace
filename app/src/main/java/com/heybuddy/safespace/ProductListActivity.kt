@@ -2,42 +2,83 @@ package com.heybuddy.safespace
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductsBinding
+import com.heybuddy.safespace.dto.ProviderCategoryDto
+import com.heybuddy.safespace.dto.ProviderDto
 import com.heybuddy.safespace.product.ProductInfo
+import com.heybuddy.safespace.service.ProviderCategoryService
+import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class ProductListActivity: AppCompatActivity() {
 
     private lateinit var bind: ActivityProductsBinding
+    private lateinit var retrfoit: Retrofit
+    private lateinit var providerCategoryService: ProviderCategoryService
+    private val moveAdapter = ProductsListAdapter()
+    private val bookAdapter = ProductsListAdapter()
+    private val musicAdapter = ProductsListAdapter()
+    private val listMap:HashMap<String, ListView> = HashMap()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
+        retrfoit = RetrofitSetting.getRetrofit()
+        providerCategoryService = retrfoit.create(ProviderCategoryService::class.java)
 
-        val moveAdapter = ProductsListAdapter()
-        val bookAdapter = ProductsListAdapter()
-        val musicAdapter = ProductsListAdapter()
+        providerCategoryService.findProviderCategory()
+            .enqueue(object: Callback<List<ProviderCategoryDto>>{
+                override fun onResponse(p0: Call<List<ProviderCategoryDto>>, body: Response<List<ProviderCategoryDto>>) {
+                    if(body.body() == null) return
 
-        //Movie에 추가
-        moveAdapter.addItem(ProductInfo("Hello"))
-        moveAdapter.addItem(ProductInfo("Hello"))
+                    val list:ArrayList<ProviderCategoryDto> = body.body() as ArrayList<ProviderCategoryDto>
+                    Log.d("item", list.toString())
 
-        //book에 추가
-        bookAdapter.addItem(ProductInfo("Hello"))
-        bookAdapter.addItem(ProductInfo("Hello"))
-        bookAdapter.addItem(ProductInfo("Hello"))
-        bookAdapter.addItem(ProductInfo("Hello"))
+                    for(x in list){
+                        Log.d("item", x.category.categoryName)
+                        val adapter = listMap.get(x.category.categoryName)?.adapter as ProductsListAdapter?
+                        adapter?.addItem(x.provider)
+                        adapter?.notifyDataSetChanged()
+                    }
 
-        //music에 추가
-        musicAdapter.addItem(ProductInfo("Hello"))
-        musicAdapter.addItem(ProductInfo("Hello"))
-        musicAdapter.addItem(ProductInfo("Hello"))
+                }
+
+                override fun onFailure(p0: Call<List<ProviderCategoryDto>>, p1: Throwable) {
+                }
+
+            })
+
+
+//
+//        //Movie에 추가
+//        moveAdapter.addItem(ProductInfo("Hello"))
+//        moveAdapter.addItem(ProductInfo("Hello"))
+//
+//        //book에 추가
+//        bookAdapter.addItem(ProductInfo("Hello"))
+//        bookAdapter.addItem(ProductInfo("Hello"))
+//        bookAdapter.addItem(ProductInfo("Hello"))
+//        bookAdapter.addItem(ProductInfo("Hello"))
+//
+//        //music에 추가
+//        musicAdapter.addItem(ProductInfo("Hello"))
+//        musicAdapter.addItem(ProductInfo("Hello"))
+//        musicAdapter.addItem(ProductInfo("Hello"))
 
 
         bind.productsMovie.adapter = bookAdapter
@@ -48,6 +89,10 @@ class ProductListActivity: AppCompatActivity() {
 
         bind.productsMusic.adapter = musicAdapter
         setListViewHeightBaseOnChildren(bind.productsMusic)
+
+        listMap.put("movie", bind.productsMovie)
+        listMap.put("book", bind.productsBook)
+        listMap.put("music", bind.productsMusic)
     }
 
     fun setListViewHeightBaseOnChildren(list: ListView){
@@ -69,7 +114,7 @@ class ProductListActivity: AppCompatActivity() {
 
 
 class ProductsListAdapter: BaseAdapter(){
-    val products: ArrayList<ProductInfo> = ArrayList()
+    val products: ArrayList<ProviderDto> = ArrayList()
 
     override fun getCount(): Int {
         return  products.size
@@ -83,7 +128,7 @@ class ProductsListAdapter: BaseAdapter(){
         return position as Long;
     }
 
-    fun addItem(s: ProductInfo){
+    fun addItem(s: ProviderDto){
         products.add(s)
     }
 
@@ -93,6 +138,11 @@ class ProductsListAdapter: BaseAdapter(){
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_products, parent, false)
+        view.findViewById<TextView>(R.id.providerTv).text = s.name
+
+        Glide.with(view)
+            .load(RetrofitSetting.URL + s.imgPath)
+            .into(view.findViewById(R.id.providerIv))
 
         return view
     }
