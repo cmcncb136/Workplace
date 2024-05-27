@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.heybuddy.safespace.databinding.ActivityJoinInfoBinding
-import com.heybuddy.safespace.databinding.ActivityLoginBinding
 
 class JoinInfoActivity: AppCompatActivity() {
 
