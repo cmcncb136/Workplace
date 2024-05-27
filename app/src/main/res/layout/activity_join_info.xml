@@ -58,10 +58,10 @@
             android:id="@+id/workplaceNumEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:paddingLeft="25dp"
 
             android:textColor="@color/white"
             android:textColorHint="@color/box_frame_grey"
-
 
             android:backgroundTint="@color/box_black"
             android:background="@drawable/button_frame_round"
@@ -88,6 +88,7 @@
             android:id="@+id/workplaceNameEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:paddingLeft="25dp"
 
             android:textColor="@color/white"
             android:textColorHint="@color/box_frame_grey"
@@ -119,6 +120,7 @@
             android:id="@+id/workplaceOwnerNameEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:paddingLeft="25dp"
 
             android:textColor="@color/white"
             android:textColorHint="@color/box_frame_grey"
@@ -152,6 +154,7 @@
             android:id="@+id/workplaceAddressEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:paddingLeft="25dp"
 
             android:textColor="@color/white"
             android:textColorHint="@color/box_frame_grey"

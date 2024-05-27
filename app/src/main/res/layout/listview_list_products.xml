@@ -4,12 +4,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/box_black">
+        android:background="@color/box_black"
+        android:layout_marginBottom="8dp"
+>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:backgroundTint="@color/box_black"
             android:background="@drawable/button_frame_round"
             android:backgroundTintMode="add"
@@ -43,6 +45,7 @@
                 android:layout_marginLeft="5dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
         />
 
         <TextView
