@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.heybuddy.safespace.basic_component.AdapterSetting
 import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
 import com.heybuddy.safespace.dto.WorkplaceInformationDto
@@ -60,7 +61,7 @@ class SubscribeListActivity: AppCompatActivity() {
         adapter.addItem(SubscribeInfo("Hello"))
 
         bind.subscribeListView.adapter = adapter
-        setListViewHeightBaseOnChildren(bind.subscribeListView)
+        AdapterSetting.setListViewHeightBaseOnChildren(bind.subscribeListView)
         bind.productBuyBtn.setOnClickListener{
             startActivity(Intent(this, ProductListActivity::class.java))
         }
@@ -111,20 +112,7 @@ class SubscribeListActivity: AppCompatActivity() {
         })
     }
 
-    fun setListViewHeightBaseOnChildren(list: ListView){
-        val adapter = list.adapter ?: return
-        var totalHeight = 0
-        for(i in 0 until adapter.count){
-            val item = adapter.getView(i, null, list)
-            item.measure(0, 0)
-            totalHeight += item.measuredHeight
-        }
 
-        val params = list.layoutParams
-        params.height = totalHeight + (list.dividerHeight * (list.count) - 1)
-        list.layoutParams = params
-        list.requestLayout()
-    }
 
 
 }
