@@ -3,14 +3,17 @@ package com.heybuddy.safespace
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductDetailBinding
 import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
@@ -103,7 +106,8 @@ class ProductDetailListAdapter: BaseAdapter(){
     }
 
     override fun getItemId(position: Int): Long {
-        return position as Long;
+        Log.d("itemList","value : " + position.toString())
+        return 0;
     }
 
     fun addItem(p: ProductDto){
@@ -118,9 +122,18 @@ class ProductDetailListAdapter: BaseAdapter(){
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_prodct_detail, parent, false)
         view.findViewById<TextView>(R.id.product_price).text = p.price.toString()
+        view.findViewById<TextView>(R.id.product_cap).text = p.capacity.toString()
 
+        Glide.with(view) //이미지 서버로부터 가져오기
+            .load(RetrofitSetting.URL +p.imgPath)
+            .into(view.findViewById(R.id.companyicon))
+
+        view.setOnClickListener {
+            val intent = Intent(context, ProductBuyActivity::class.java)
+            intent.putExtra("productId", p.productId)
+            context.startActivity(intent)
+        }
 
         return view
     }
-
 }

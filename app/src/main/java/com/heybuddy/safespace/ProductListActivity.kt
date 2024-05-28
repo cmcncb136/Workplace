@@ -129,7 +129,7 @@ class ProductsListAdapter: BaseAdapter(){
     }
 
     override fun getItemId(position: Int): Long {
-        return position as Long;
+        return 0;//position as Long;
     }
 
     fun addItem(s: ProviderDto){

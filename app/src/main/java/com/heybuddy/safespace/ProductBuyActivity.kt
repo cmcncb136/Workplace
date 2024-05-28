@@ -9,7 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.heybuddy.safespace.basic_component.Login
+import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductPaymentBinding
+import com.heybuddy.safespace.service.SubscribeInformationService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 
 class ProductBuyActivity: AppCompatActivity() {
@@ -31,10 +39,23 @@ class ProductBuyActivity: AppCompatActivity() {
 
     private lateinit var gotoPayment: Button
 
+    private lateinit var retrofit: Retrofit
+    private lateinit var subscribeInformationService: SubscribeInformationService
+    private var auth = FirebaseAuth.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bind = ActivityProductPaymentBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        if(auth.uid == null){
+            startActivity(Intent(this@ProductBuyActivity, LoginActivity::class.java))
+            finish()
+            return;
+        }
+
+        retrofit = RetrofitSetting.getRetrofit()
+        subscribeInformationService = retrofit.create(SubscribeInformationService::class.java)
 
         //이동
         productPayment_backIcon = bind.productPaymentBackIcon
@@ -64,8 +85,30 @@ class ProductBuyActivity: AppCompatActivity() {
 
         // 이동 구현
         bind.gotoPayment.setOnClickListener {
-            Toast.makeText(this, "go Main Page", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, MainActivity::class.java))
+            val productId = intent.getStringExtra("productId")
+
+            if(productId == null){
+                finish()
+                return@setOnClickListener;
+            }
+
+            subscribeInformationService.addSubscribeInfo(auth.uid!!, productId!!)
+                .enqueue(object: Callback<Boolean>{
+                    override fun onResponse(p0: Call<Boolean>, body: Response<Boolean>) {
+                        if(body.body() == null || !body.body()!!){
+                            Toast.makeText(this@ProductBuyActivity, "구매 실패했습니다.", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this@ProductBuyActivity, "구매 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@ProductBuyActivity, SubscribeListActivity::class.java))
+                            finish()
+                        }
+                    }
+
+                    override fun onFailure(p0: Call<Boolean>, p1: Throwable) {
+                        Toast.makeText(this@ProductBuyActivity, p1.message, Toast.LENGTH_LONG).show()
+                    }
+
+                })
         }
     }
 }
