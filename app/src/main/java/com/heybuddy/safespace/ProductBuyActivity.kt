@@ -14,7 +14,7 @@ import com.heybuddy.safespace.databinding.ActivityProductPaymentBinding
 
 class ProductBuyActivity: AppCompatActivity() {
 
-    private lateinit var productPayment_backIcon: ImageButton
+    private lateinit var productPayment_backIcon: ImageView
     private lateinit var chooseCompany: TextView
 
     private lateinit var subscribeProduct: TextView

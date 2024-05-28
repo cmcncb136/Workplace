@@ -1,5 +1,6 @@
 package com.heybuddy.safespace
 
+import android.app.appsearch.AppSearchManager.SearchContext
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.heybuddy.safespace.basic_component.AdapterSetting
 import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductsBinding
 import com.heybuddy.safespace.dto.ProviderCategoryDto
@@ -30,23 +35,48 @@ class ProductListActivity: AppCompatActivity() {
     private lateinit var bind: ActivityProductsBinding
     private lateinit var retrfoit: Retrofit
     private lateinit var providerCategoryService: ProviderCategoryService
+    private lateinit var AdapterSetting: AdapterSetting//
     private val moveAdapter = ProductsListAdapter()
     private val bookAdapter = ProductsListAdapter()
     private val musicAdapter = ProductsListAdapter()
     private val listMap:HashMap<String, ListView> = HashMap()
+
+    private lateinit var searchClickIv: ImageView
+    private lateinit var searchContext: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
+        //검색 버튼 처리
+        searchClickIv = bind.searchClickIv
+        searchContext = bind.searchContext
+        var userInputData : String
+
+        searchClickIv.setOnClickListener {
+            Toast.makeText(this, "검색 버튼 click", Toast.LENGTH_SHORT).show();
+
+            //editText에서 값 받아옴
+            userInputData = searchContext.text.toString().trim()
+
+
+        }
+
+        //retrfoit 객체 생성
         retrfoit = RetrofitSetting.getRetrofit()
         providerCategoryService = retrfoit.create(ProviderCategoryService::class.java)
 
+        //통신 받아오기
         providerCategoryService.findProviderCategory()
             .enqueue(object: Callback<List<ProviderCategoryDto>>{
                 override fun onResponse(p0: Call<List<ProviderCategoryDto>>, body: Response<List<ProviderCategoryDto>>) {
-                    if(body.body() == null) return
+                    if(body.body() == null) {
+                        Toast.makeText(this@ProductListActivity, "존재하는 콘텐츠 제공자가 아닙니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(Intent(this@ProductListActivity, ProductListActivity::class.java))
+                        finish()
+                        return
+                    }
 
                     val list:ArrayList<ProviderCategoryDto> = body.body() as ArrayList<ProviderCategoryDto>
                     Log.d("item", list.toString())
@@ -63,28 +93,14 @@ class ProductListActivity: AppCompatActivity() {
                 }
 
                 override fun onFailure(p0: Call<List<ProviderCategoryDto>>, p1: Throwable) {
+                    Toast.makeText(this@ProductListActivity, p1.message, Toast.LENGTH_LONG).show();
+
                 }
 
             })
 
 
-//
-//        //Movie에 추가
-//        moveAdapter.addItem(ProductInfo("Hello"))
-//        moveAdapter.addItem(ProductInfo("Hello"))
-//
-//        //book에 추가
-//        bookAdapter.addItem(ProductInfo("Hello"))
-//        bookAdapter.addItem(ProductInfo("Hello"))
-//        bookAdapter.addItem(ProductInfo("Hello"))
-//        bookAdapter.addItem(ProductInfo("Hello"))
-//
-//        //music에 추가
-//        musicAdapter.addItem(ProductInfo("Hello"))
-//        musicAdapter.addItem(ProductInfo("Hello"))
-//        musicAdapter.addItem(ProductInfo("Hello"))
-
-
+        //카테고리에 맞게 product setting
         bind.productsMovie.adapter = bookAdapter
         setListViewHeightBaseOnChildren(bind.productsBook)
 

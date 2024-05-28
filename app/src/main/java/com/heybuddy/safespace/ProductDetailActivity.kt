@@ -51,15 +51,15 @@ class ProductDetailActivity: AppCompatActivity() {
         bind.ProductDetailListView.adapter = adapter
         AdapterSetting.setListViewHeightBaseOnChildren(bind.ProductDetailListView)
 
-        //call에 content product로 providerId를 가져와서 뿌려줌
+        //call에 content product로 providerId를 가져와서 뿌려줌 (현재 전체 정보를 뿌려줌)
         //val call = productService.findByProviderIdProduct(providerId)
         val call = productService.findAllProduct()
 
         //통신
         call.enqueue(object: Callback<List<ProductDto>>{
-            //받아와따
+            //받아옴
             override fun onResponse(p0: Call<List<ProductDto>>, body : Response<List<ProductDto>>) {
-                //받아온 상품 id가 null
+                //받아온 상품 id가 null -> 지난 activity로 돌려보내줌
                 if(body.body() == null) {
                     Toast.makeText(this@ProductDetailActivity, "존재하지 않는 제공자입니다.", Toast.LENGTH_SHORT).show();
                     startActivity(Intent(this@ProductDetailActivity, ProductListActivity::class.java))
