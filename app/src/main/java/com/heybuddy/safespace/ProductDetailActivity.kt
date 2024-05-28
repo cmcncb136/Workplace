@@ -3,6 +3,7 @@ package com.heybuddy.safespace
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +62,7 @@ class ProductDetailActivity: AppCompatActivity() {
             override fun onResponse(p0: Call<List<ProductDto>>, body : Response<List<ProductDto>>) {
                 //받아온 상품 id가 null -> 지난 activity로 돌려보내줌
                 if(body.body() == null) {
-                    Toast.makeText(this@ProductDetailActivity, "존재하지 않는 제공자입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this@ProductDetailActivity, "그런 제공자는 없습니다.", Toast.LENGTH_SHORT).show();
                     startActivity(Intent(this@ProductDetailActivity, ProductListActivity::class.java))
                     finish()
                     return
@@ -79,6 +80,7 @@ class ProductDetailActivity: AppCompatActivity() {
             override fun onFailure(p0: Call<List<ProductDto>>, p1: Throwable) {
                 Toast.makeText(this@ProductDetailActivity, p1.message, Toast.LENGTH_LONG).show();
             }
+
         })
 
 
@@ -89,7 +91,6 @@ class ProductDetailActivity: AppCompatActivity() {
             startActivity(i)
         }
 
-    }
 
 }
 
@@ -115,6 +116,7 @@ class ProductDetailListAdapter: BaseAdapter(){
         val context = parent!!.context
         val p = products[position]
 
+
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_prodct_detail, parent, false)
 
@@ -127,6 +129,7 @@ class ProductDetailListAdapter: BaseAdapter(){
 
         view.findViewById<TextView>(R.id.product_cap).text = p.capacity.toString()
         view.findViewById<TextView>(R.id.product_price).text = p.price.toString()
+        view.findViewById<TextView>(R.id.product_cap).text = p.capacity.toString()
 
         //페이지 이동
         view.setOnClickListener {
@@ -136,6 +139,15 @@ class ProductDetailListAdapter: BaseAdapter(){
             context.startActivity(intent)
         }
 
+        Glide.with(view) //이미지 서버로부터 가져오기
+            .load(RetrofitSetting.URL +p.imgPath)
+            .into(view.findViewById(R.id.companyicon))
+
+        view.setOnClickListener {
+            val intent = Intent(context, ProductBuyActivity::class.java)
+            intent.putExtra("productId", p.productId)
+            context.startActivity(intent)
+        }
 
         return view
     }

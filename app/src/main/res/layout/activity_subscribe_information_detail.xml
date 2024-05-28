@@ -10,7 +10,7 @@
         >
 
     <TextView
-            android:id = "@+id/capacityTv"
+            android:id = "@+id/capacity_nowTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -34,7 +34,7 @@
             android:backgroundTint="@color/box_black"
             android:backgroundTintMode="add"
 
-            app:layout_constraintTop_toBottomOf="@+id/capacityTv"
+            app:layout_constraintTop_toBottomOf="@+id/capacity_nowTv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:gravity="center"
@@ -100,6 +100,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/categoryTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -128,6 +129,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/provider_nameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -156,6 +158,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/product_nameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -184,6 +187,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/capacityTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -213,6 +217,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/payment_dateTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -242,6 +247,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/next_payment_dateTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -271,6 +277,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/start_dateTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
@@ -299,6 +306,7 @@
                     android:textColor="@color/white" />
 
             <TextView
+                    android:id="@+id/end_dateTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"

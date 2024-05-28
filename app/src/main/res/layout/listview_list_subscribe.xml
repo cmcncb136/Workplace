@@ -16,7 +16,7 @@
             android:layout_marginVertical="3dp"
             >
         <ImageView
-                android:id="@+id/subscribeTv"
+                android:id="@+id/subscribeIv"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/netflix_icon"
