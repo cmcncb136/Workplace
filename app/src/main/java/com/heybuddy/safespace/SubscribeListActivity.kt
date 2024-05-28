@@ -139,7 +139,6 @@ class SubscribesListAdapter: BaseAdapter(){
         val context = parent!!.context
         val s = subscribes[position]
 
-
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.listview_list_subscribe, parent, false)
         view.findViewById<TextView>(R.id.subscribe_nameTv).text = s.productName
