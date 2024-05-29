@@ -123,6 +123,7 @@
             android:id="@+id/passwdEt"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:inputType="textPassword"
 
             android:textColor="@color/white"
             android:textColorHint="@color/box_frame_grey"
