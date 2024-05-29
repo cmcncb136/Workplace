@@ -271,7 +271,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
 
-            android:text="결재하기"
+            android:text="결제하기"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/white"

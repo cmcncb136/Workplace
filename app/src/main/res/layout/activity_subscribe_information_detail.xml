@@ -273,7 +273,7 @@
 
 
                     android:textSize="16sp"
-                    android:text="최초 경제일"
+                    android:text="최초 결제일"
                     android:textColor="@color/white" />
 
             <TextView
