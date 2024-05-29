@@ -2,6 +2,7 @@ package com.heybuddy.safespace
 
 import android.content.Context
 import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.heybuddy.safespace.basic_component.AdapterSetting
+import com.heybuddy.safespace.basic_component.DefaultFormat
 import com.heybuddy.safespace.basic_component.RetrofitSetting
 import com.heybuddy.safespace.databinding.ActivityProductDetailBinding
 import com.heybuddy.safespace.databinding.ActivitySubscribeListBinding
@@ -28,7 +30,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 class ProductDetailActivity: AppCompatActivity() {
-
     private lateinit var bind: ActivityProductDetailBinding
     private lateinit var retrofit: Retrofit
     private lateinit var back_icon_detail: ImageView
@@ -42,40 +43,39 @@ class ProductDetailActivity: AppCompatActivity() {
         retrofit = RetrofitSetting.getRetrofit()
         val productService: ProductService = retrofit.create(ProductService::class.java)
 
-        val providerId = this.intent.getStringExtra("providerId")?:"a";
-
+        val providerId = this.intent.getStringExtra("providerId") ?: "a";
         val adapter = ProductDetailListAdapter()
 
         back_icon_detail = bind.backIconDetail
+        bind.companyname.text = this.intent.getStringExtra("providerName") ?: "Netflix"
+
 
         //리스트 뷰 받아와서 넣기
         bind.ProductDetailListView.adapter = adapter
         AdapterSetting.setListViewHeightBaseOnChildren(bind.ProductDetailListView)
 
         //call에 content product로 providerId를 가져와서 뿌려줌 (현재 전체 정보를 뿌려줌)
-        //val call = productService.findByProviderIdProduct(providerId)
-        val call = productService.findAllProduct()
+        val call = productService.findByProviderIdProduct(providerId)
 
         //통신
-        call.enqueue(object: Callback<List<ProductDto>>{
+        call.enqueue(object : Callback<List<ProductDto>> {
             //받아옴
-            override fun onResponse(p0: Call<List<ProductDto>>, body : Response<List<ProductDto>>) {
+            override fun onResponse(p0: Call<List<ProductDto>>, body: Response<List<ProductDto>>) {
                 //받아온 상품 id가 null -> 지난 activity로 돌려보내줌
-                if(body.body() == null) {
+                val products = body.body()!!
+                if (products == null) {
                     Toast.makeText(this@ProductDetailActivity, "그런 제공자는 없습니다.", Toast.LENGTH_SHORT).show();
                     startActivity(Intent(this@ProductDetailActivity, ProductListActivity::class.java))
                     finish()
                     return
                 }
 
-                val products = body.body()!!
-
-                for(p in products){
+                for (p in products)
                     adapter.addItem(p)
-                }
 
-               adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
             }
+
             //받아오지 못함
             override fun onFailure(p0: Call<List<ProductDto>>, p1: Throwable) {
                 Toast.makeText(this@ProductDetailActivity, p1.message, Toast.LENGTH_LONG).show();
@@ -89,12 +89,13 @@ class ProductDetailActivity: AppCompatActivity() {
             Toast.makeText(this, "콘텐츠 제공업체 선택 페이지로 이동합니다.", Toast.LENGTH_LONG).show();
             val i = Intent(this, ProductListActivity::class.java)
             startActivity(i)
+            finish()
         }
-
+    }
 
 }
 
-class ProductDetailListAdapter: BaseAdapter(){
+class ProductDetailListAdapter: BaseAdapter() {
     val products: ArrayList<ProductDto> = ArrayList()
     override fun getCount(): Int {
         return products.size
@@ -105,10 +106,10 @@ class ProductDetailListAdapter: BaseAdapter(){
     }
 
     override fun getItemId(position: Int): Long {
-        return position as Long;
+        return 0; //position as Long;
     }
 
-    fun addItem(p: ProductDto){
+    fun addItem(p: ProductDto) {
         products.add(p)
     }
 
@@ -124,11 +125,11 @@ class ProductDetailListAdapter: BaseAdapter(){
         //findViewById<TextView>(R.id.content_type).text = p.companyname.toString()
 
         Glide.with(view)
-            .load(RetrofitSetting.URL+ p.imgPath)
+            .load(RetrofitSetting.URL + p.imgPath)
             .into(view.findViewById(R.id.company_icon))
 
         view.findViewById<TextView>(R.id.product_cap).text = p.capacity.toString()
-        view.findViewById<TextView>(R.id.product_price).text = p.price.toString()
+        view.findViewById<TextView>(R.id.product_price).text = DefaultFormat.defaultNumberFormat(p.price.toInt())
         view.findViewById<TextView>(R.id.product_cap).text = p.capacity.toString()
 
         //페이지 이동
@@ -136,20 +137,17 @@ class ProductDetailListAdapter: BaseAdapter(){
             val intent = Intent(context, ProductBuyActivity::class.java)
             intent.putExtra("productId", p.productId);
 
+            val x = parent.context as AppCompatActivity
+            intent.putExtra("providerName", x.intent.getStringExtra("providerName")?: "Netflix");
+
             context.startActivity(intent)
         }
 
         Glide.with(view) //이미지 서버로부터 가져오기
-            .load(RetrofitSetting.URL +p.imgPath)
-            .into(view.findViewById(R.id.companyicon))
+            .load(RetrofitSetting.URL + p.imgPath)
+            .into(view.findViewById(R.id.company_icon))
 
-        view.setOnClickListener {
-            val intent = Intent(context, ProductBuyActivity::class.java)
-            intent.putExtra("productId", p.productId)
-            context.startActivity(intent)
-        }
 
         return view
     }
-
 }

@@ -164,9 +164,12 @@ class ProductsListAdapter: BaseAdapter(){
             .load(RetrofitSetting.URL +p.imgPath)
             .into(view.findViewById(R.id.providerIv))
 
+
+
         view.setOnClickListener { //페이지 이동
             val intent = Intent(context, ProductDetailActivity::class.java)
             intent.putExtra("providerId", p.providerId);
+            intent.putExtra("providerName", p.name);
 
             context.startActivity(intent)
         }

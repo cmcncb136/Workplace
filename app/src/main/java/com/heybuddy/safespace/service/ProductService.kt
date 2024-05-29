@@ -10,6 +10,6 @@ interface ProductService {
     fun findAllProduct(): Call<List<ProductDto>>
     @GET("product/find/")
     fun findProduct(@Query("productId") productId: String): Call<ProductDto>
-    @GET("product/findByProviderId")
+    @GET("product/findProvider/")
     fun findByProviderIdProduct(@Query("providerId") providerId: String): Call<List<ProductDto>>
 }

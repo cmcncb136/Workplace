@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
         bind.loadingGoBtn.setOnClickListener{
             startActivity(Intent(this, LoadingActivity::class.java))
         }

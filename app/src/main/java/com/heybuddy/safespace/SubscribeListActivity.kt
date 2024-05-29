@@ -73,8 +73,6 @@ class SubscribeListActivity: AppCompatActivity() {
         val call = workplaceInformationService.existWorkplace(auth.uid!!)
         call.enqueue(object : Callback<Boolean> {
             override fun onResponse(p0: Call<Boolean>, rps: Response<Boolean>) {
-                Toast.makeText(this@SubscribeListActivity, "Communication Success! : " + rps.body(), Toast.LENGTH_SHORT)
-                    .show()
                 if (rps.body() ?: false) {
                     emailTv.text = auth.currentUser!!.email
                     getWorkplaceInformation(workplaceInformationService)
@@ -110,10 +108,6 @@ class SubscribeListActivity: AppCompatActivity() {
                     for(s in list)
                         adapter.addItem(s)
 
-                    Toast.makeText(this@SubscribeListActivity,
-                        "subscribe info : " + list.size,Toast.LENGTH_SHORT).show()
-
-
                     adapter.notifyDataSetChanged()
                     AdapterSetting.setListViewHeightBaseOnChildren(bind.subscribeListView)
                 }
@@ -129,7 +123,6 @@ class SubscribeListActivity: AppCompatActivity() {
 
         call.enqueue(object: Callback<WorkplaceInformationDto>{
             override fun onResponse(p0: Call<WorkplaceInformationDto>, rps: Response<WorkplaceInformationDto>) {
-                Toast.makeText(this@SubscribeListActivity, "Communication Success! : " + rps.body(), Toast.LENGTH_SHORT).show()
                 if(rps.body() != null){
                     val workplace = rps.body()!!
                     ipTv.text = workplace.workspaceIp?: ""

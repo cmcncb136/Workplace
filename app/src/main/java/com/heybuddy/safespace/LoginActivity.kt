@@ -22,7 +22,7 @@ import com.heybuddy.safespace.databinding.ActivityLoginBinding
 import java.util.regex.Pattern
 import kotlin.math.log
 
-class LoginActivity : AppCompatActivity() {
+class  LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var bind: ActivityLoginBinding
 
@@ -65,6 +65,10 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 singIn(email, pw);
             }
+        }
+
+        joinBtn.setOnClickListener{
+            startActivity(Intent(this, JoinActivity::class.java))
         }
     }
 

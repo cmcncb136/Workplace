@@ -33,7 +33,6 @@ class SubscribeInformationDetailActivity : AppCompatActivity() {
             finish()
             return
         }
-        Toast.makeText(this@SubscribeInformationDetailActivity, "find id : " + id.toString(), Toast.LENGTH_LONG).show()
         subscribeInformationService.findSubscribeInfo(id).enqueue(
             object: Callback<SubscribeInformationDto>{
                 override fun onResponse(p0: Call<SubscribeInformationDto>, body: Response<SubscribeInformationDto>) {

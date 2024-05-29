@@ -53,7 +53,6 @@ class JoinActivity: AppCompatActivity() {
 
             if(!emailPattern.matcher(email).matches()) {
                 Toast.makeText(this, "Email 양식이 맞지 않습니다!", Toast.LENGTH_SHORT).show();
-                startActivity(Intent(this, JoinInfoActivity::class.java))
             }else{
                 join(email, pw);
             }

@@ -52,11 +52,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/joinFinishBtn"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            >
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
                 >
 
             <TextView
@@ -251,11 +253,56 @@
                     android:paddingLeft="25dp"
                     android:backgroundTint="@color/box_black"
                     android:background="@drawable/button_frame_round"
-                    android:layout_marginBottom="20dp"
-
                     android:backgroundTintMode="add"
 
                     app:layout_constraintTop_toBottomOf="@id/workplaceCategoryTv"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/workplaceIpTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="IP"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/workplaceCategoryEt"
+                    />
+
+            <TextView
+                    android:id="@+id/workplaceIpCheckTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="10dp"
+
+                    android:text="YOUR PUBLIC IP : "
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+
+                    app:layout_constraintLeft_toRightOf="@id/workplaceIpTv"
+                    app:layout_constraintBottom_toTopOf="@+id/workplaceIpEt"
+                    />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/workplaceIpEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/box_frame_grey"
+
+                    android:paddingLeft="25dp"
+                    android:backgroundTint="@color/box_black"
+                    android:background="@drawable/button_frame_round"
+                    android:backgroundTintMode="add"
+
+                    app:layout_constraintTop_toBottomOf="@id/workplaceIpTv"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>

@@ -1,5 +1,6 @@
 package com.heybuddy.safespace.basic_component
 
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,7 +11,9 @@ class RetrofitSetting {
         fun getRetrofit() : Retrofit{
             return Retrofit.Builder()
                 .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(
+                    GsonBuilder().setLenient().create() //엄격한 규칙을 좀 더 자유롭게해준다.
+                ))
                 .build()
         }
     }
