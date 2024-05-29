@@ -85,6 +85,9 @@
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:singleLine="true"
+            android:maxLines="1"
+
 
             android:hint="아이디를 입력해 주세요"
             android:textColor="@color/white"
@@ -118,6 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="textPassword"
+            android:singleLine="true"
+            android:maxLines="1"
 
             android:hint="비밀번호를 입력해 주세요"
             android:textColor="@color/white"

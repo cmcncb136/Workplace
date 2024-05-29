@@ -28,6 +28,7 @@
             android:textSize="50dp"
 
 
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/top_guide"
@@ -83,6 +84,9 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
                     android:paddingLeft="25dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:backgroundTint="@color/box_black"
                     android:background="@drawable/button_frame_round"
@@ -111,6 +115,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:paddingLeft="25dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
@@ -144,6 +151,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:paddingLeft="25dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
@@ -182,6 +192,9 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
                     android:paddingLeft="25dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:backgroundTint="@color/box_black"
                     android:background="@drawable/button_frame_round"
@@ -216,6 +229,9 @@
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
                     android:paddingLeft="25dp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:backgroundTint="@color/box_black"
                     android:background="@drawable/button_frame_round"
@@ -249,6 +265,9 @@
 
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:paddingLeft="25dp"
                     android:backgroundTint="@color/box_black"
@@ -296,6 +315,9 @@
 
                     android:textColor="@color/white"
                     android:textColorHint="@color/box_frame_grey"
+                    android:singleLine="true"
+                    android:maxLines="1"
+
 
                     android:paddingLeft="25dp"
                     android:backgroundTint="@color/box_black"
